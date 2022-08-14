@@ -26,6 +26,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 			<version>2.9.2</version>
 		</dependency>
 */
+/* Add to application.yml
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+*/
 
 @Configuration
 @EnableSwagger2
