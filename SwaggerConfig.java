@@ -12,7 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.service.ApiInfo;
 
 //-------------------------------------------------------------------------URL
-//http://localhost:8080/swagger-ui.html //Ek Bilgi: Program Arguments: -Dserver.port=8081 (Swagger'den bağımsız, sadece bilgi amaçlı)
+//http://localhost:8080/swagger-ui.html //Ek Bilgi: Add VM Options: -Dserver.port=8081 (Swagger'den bağımsız, sadece bilgi amaçlı)
 //http://localhost:8080/swagger-ui/#
 
 //-------------------------------------------------------------------------dependency
