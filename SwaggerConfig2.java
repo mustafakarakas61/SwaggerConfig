@@ -1,4 +1,4 @@
-package com.medyatakip.bcservices.newsclipper.config;
+//package_name
 
 
 import com.google.common.base.Predicates;
@@ -14,6 +14,30 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+//-------------------------------------------------------------------------URL
+//http://localhost:8080/PROJECTNAME/swagger-ui.html#/
+
+//-------------------------------------------------------------------------dependency
+/*
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+*/
+//-------------------------------------------------------------------------application.yml
+/* Add to application.yml
+server:
+  servlet:
+    context-path: "/PROJECTNAME"
+*/
+//-------------------------------------------------------------------------Codes
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
@@ -28,8 +52,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .useDefaultResponseMessages(Boolean.FALSE)
                 .apiInfo(new ApiInfoBuilder()
                         .version("1.0")
-                        .title("news-clipper")
-                        .description("Haber videoların cliplenmesi yapılır")
+                        .title("BAŞLIK")                                            //Başlık (Proje ismi yazılır genelde)
+                        .description("AÇIKLAMA")                                   //Açıklama
                         .build());
     }
 
