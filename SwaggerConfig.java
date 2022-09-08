@@ -1,4 +1,4 @@
-//package_name                                                                    //package_name
+//package_name
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
