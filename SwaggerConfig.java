@@ -1,53 +1,50 @@
-//package_name                                                                    //package_name
+package com.medyatakip.bcservices.newsclipper.config;
 
+
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.service.ApiInfo;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-//-------------------------------------------------------------------------URL
-//http://localhost:8080/swagger-ui.html //Ek Bilgi: Add VM Options: -Dserver.port=8081 (Swagger'den bağımsız, sadece bilgi amaçlı)
-//http://localhost:8080/swagger-ui/#
-
-//-------------------------------------------------------------------------dependency
-/* Add to pom.xml this dependencies
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-*/
-//-------------------------------------------------------------------------application.yml
-/* Add to application.yml
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-*/
-//-------------------------------------------------------------------------Codes
 @Configuration
-public class SwaggerConfig {
+@EnableSwagger2
+public class SwaggerConfig extends WebMvcConfigurationSupport {
+
     @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage("main_package_name")) //main_package_name
-                .paths(PathSelectors.regex("/.*"))
-                .build().apiInfo(apiEndPointsInfo());
+    public Docket productApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(Predicates.not(PathSelectors.regex("/error.*")))
+                .paths(PathSelectors.any()).build()
+                .useDefaultResponseMessages(Boolean.FALSE)
+                .apiInfo(new ApiInfoBuilder()
+                        .version("1.0")
+                        .title("news-clipper")
+                        .description("Haber videoların cliplenmesi yapılır")
+                        .build());
     }
-	
-    private ApiInfo apiEndPointsInfo() {
-        return new ApiInfoBuilder().title("Spring Boot Swagger")                //subject
-                .description("User Api Documentation")
-                .contact(new Contact("Mustafa KARAKAŞ", "", ""))                //your_name
-                .license("Apache 2.0")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-                .version("1.12.3")
-                .build();
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    @Bean
+    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+        return new RequestMappingHandlerMapping();
     }
 }
