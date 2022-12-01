@@ -36,10 +36,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 server:
   servlet:
     context-path: "/PROJECTNAME"
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 */
 //-------------------------------------------------------------------------Codes
 @Configuration
